@@ -1,3 +1,3 @@
-Downloads from the internet youtube and does the stuff and things in python
+Downloads from the youtube and does the things in python
 
-Run init.py to create configurations
+Run init.py to create configurations, change DOWNLOAD_DELAY if slow internet
