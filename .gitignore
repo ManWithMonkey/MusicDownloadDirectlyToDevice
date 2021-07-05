@@ -1,0 +1,6 @@
+trash/*
+songs/*
+__pycache__/*
+othertrash/*
+
+config.py
