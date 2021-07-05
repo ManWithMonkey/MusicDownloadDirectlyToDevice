@@ -3,6 +3,7 @@
 import re
 from pytube import Playlist
 from sys import argv
+import random
 
 from inner import clear, cleanurl, converttrash, movetodevice
 
@@ -19,9 +20,10 @@ def DownloadPlaylist(link, link_cap = None):
     playlist = Playlist(link)
     playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
 
-    print("Found:", len(playlist.video_urls), "link(s) and downloading:", (link_cap if link_cap else len(playlist.video_urls)))
+    videos, urls = list(zip(*(sorted(zip(playlist.videos, playlist.video_urls), key=lambda _: random.random()))[:link_cap if link_cap else len(playlist)]))
 
-    for url in playlist.video_urls[:link_cap if link_cap else len(playlist.video_urls)]:
+    print("Found:", len(urls), "link(s) and downloading:", (link_cap if link_cap else len(urls)))
+    for url in urls:
         print(url)
 
     @timeout(DOWNLOAD_DELAY)
@@ -31,7 +33,7 @@ def DownloadPlaylist(link, link_cap = None):
         audio.download(output_path=TRASHDIR)
 
     MAX_ATTEMPTS = 2
-    for video in playlist.videos[:link_cap if link_cap else len(playlist)]:
+    for video in videos:
         for attempt in range(MAX_ATTEMPTS):
             try:
                 msg = ("Downloading: \"" if attempt == 0 else "Attempting to download again: \"") + video.title + "\" to " + TRASHDIR
