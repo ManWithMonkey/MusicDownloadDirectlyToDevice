@@ -42,11 +42,11 @@ def DownloadPlaylist(link, link_cap = None):
 
 if __name__ == '__main__':
     if len(argv) > 2:
-        link = CleanURL(argv[1])
-        ClearAllSongs()
-        ClearAllTrash()
-        DownloadPlaylist(link, int(argv[2]))
-        ConvertAll()
+        # link = CleanURL(argv[1])
+        # ClearAllSongs()
+        # ClearAllTrash()
+        # DownloadPlaylist(link, int(argv[2]))
+        # ConvertAll()
         MoveAllToDevice()
     elif len(argv) > 1:
         link = CleanURL(''.join(argv[1:]))
