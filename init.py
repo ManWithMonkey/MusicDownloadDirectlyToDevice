@@ -14,8 +14,10 @@ MUSICSRC = this_dir + "/songs/"
 
 if not os.path.exists(TRASHDIR):
     print("Creating:", TRASHDIR)
+    os.mkdir(TRASHDIR)
 if not os.path.exists(MUSICSRC):
     print("Creating:", MUSICSRC)
+    os.mkdir(MUSICSRC)
 
 MUSICDST = input("Enter music destination folder: ")
 
