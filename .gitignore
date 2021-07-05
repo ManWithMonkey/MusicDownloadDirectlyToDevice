@@ -1,7 +1,7 @@
 trash/*
 songs/*
 __pycache__/*
-inner/__pycache__
+/inner/__pycache__/**
 othertrash/*
 
 config.py
