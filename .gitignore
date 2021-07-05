@@ -1,9 +1,0 @@
-trash/*
-songs/*
-othertrash/*
-
-config.py
-
-*.pyc
-*.pyo
-*.pyd
