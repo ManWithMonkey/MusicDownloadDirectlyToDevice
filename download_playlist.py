@@ -22,7 +22,7 @@ def DownloadPlaylist(link, link_cap = None):
 
     videos, urls = list(zip(*(sorted(zip(playlist.videos, playlist.video_urls), key=lambda _: random.random()))[:link_cap if link_cap else len(playlist)]))
 
-    print("Found:", len(urls), "link(s) and downloading:", (link_cap if link_cap else len(urls)))
+    print("Found:", len(urls), "link(s) and downloading:", len(urls))
     for url in urls:
         print(url)
 
@@ -49,7 +49,6 @@ if __name__ == '__main__':
         ClearAllTrash()
         DownloadPlaylist(link, int(argv[2]))
         ConvertAll()
-        ClearDevice()
         MoveAllToDevice()
     elif len(argv) > 1:
         link = CleanURL(''.join(argv[1:]))
@@ -57,8 +56,7 @@ if __name__ == '__main__':
         ClearAllTrash()
         DownloadPlaylist(link)
         ConvertAll()
-        ClearDevice()
         MoveAllToDevice()
     else:
         print("Give link to playlist.")
-        print("./download_playlist_and_clear_others.py <link> <cap>")
+        print("./download_playlist.py <link> <cap>")

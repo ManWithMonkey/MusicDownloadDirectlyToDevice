@@ -11,11 +11,12 @@ from config import *
 def GetFilesInDirectory(dirpath):
     return [f for f in listdir(dirpath) if isfile(join(dirpath, f))]
 
-def MoveAllToDevice():
+def ClearDevice():
     oldFiles = glob.glob(MUSICDST+"*.mp3")
     for f in oldFiles:
         os.remove(f)
 
+def MoveAllToDevice():
     for f in GetFilesInDirectory(MUSICSRC):
         src = MUSICSRC + f
         dst = MUSICDST + f[:-4] + ".mp3"
