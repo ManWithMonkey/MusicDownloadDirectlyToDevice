@@ -20,6 +20,8 @@ if not os.path.exists(MUSICSRC):
     os.mkdir(MUSICSRC)
 
 MUSICDST = input("Enter music destination folder: ")
+if(MUSICDST[-1] != '/'):
+    MUSICDST += '/'
 
 DOWNLOAD_DELAY = 10
 
