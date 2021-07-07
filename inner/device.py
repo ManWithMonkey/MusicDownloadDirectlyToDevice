@@ -6,10 +6,8 @@ from os.path import isfile, join
 import glob
 import subprocess
 
+from filehelper import GetFilesInDirectory
 from config import *
-
-def GetFilesInDirectory(dirpath):
-    return [f for f in listdir(dirpath) if isfile(join(dirpath, f))]
 
 def GetAllSongsOnDevice():
     return glob.glob(MUSICDST+"*.mp3")
