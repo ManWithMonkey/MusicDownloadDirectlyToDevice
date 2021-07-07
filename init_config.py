@@ -32,5 +32,6 @@ DOWNLOAD_DELAY = 10
 with open(CONFIGFILE, "w+") as f:
     f.write(f"{TRASHDIR=}\n")
     f.write(f"{MUSICSRC=}\n")
+    f.write(f"{LOGDIR=}\n")
     f.write(f"{MUSICDST=}\n")
     f.write(f"{DOWNLOAD_DELAY=}\n")
