@@ -11,6 +11,9 @@ from config import *
 def GetFilesInDirectory(dirpath):
     return [f for f in listdir(dirpath) if isfile(join(dirpath, f))]
 
+def GetAllSongsOnDevice():
+    return glob.glob(MUSICDST+"*.mp3")
+
 def ClearDevice():
     oldFiles = glob.glob(MUSICDST+"*.mp3")
     for f in oldFiles:
