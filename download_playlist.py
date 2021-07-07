@@ -5,7 +5,7 @@ from pytube import Playlist
 from sys import argv
 import random
 
-from inner import clear, cleanurl, converttrash, device
+from inner import config, clear, cleanurl, converttrash, device
 
 from inner.timeout import timeout
 from inner.clear import ClearAllTrash, ClearAllSongs
@@ -13,7 +13,7 @@ from inner.cleanurl import CleanURL
 from inner.converttrash import ConvertAll
 from inner.device import MoveAllToDevice
 
-from config import *
+from inner.config import *
 
 def DownloadPlaylist(link, link_cap = None):
     print("Downloading playlist:", link)

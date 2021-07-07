@@ -11,6 +11,7 @@ if not os.path.exists(CONFIGFILE):
 
 TRASHDIR = this_dir + "/trash/"
 MUSICSRC = this_dir + "/songs/"
+LOGDIR = this_dir + "/log/"
 
 if not os.path.exists(TRASHDIR):
     print("Creating:", TRASHDIR)
@@ -18,6 +19,9 @@ if not os.path.exists(TRASHDIR):
 if not os.path.exists(MUSICSRC):
     print("Creating:", MUSICSRC)
     os.mkdir(MUSICSRC)
+if not os.path.exists(LOGDIR):
+    print("Creating:", LOGDIR)
+    os.mkdir(LOGDIR)
 
 MUSICDST = input("Enter music destination folder: ")
 if(MUSICDST[-1] != '/'):

@@ -3,3 +3,4 @@ songs/*
 trash/*
 *.pyc
 *.pyo
+log/*
