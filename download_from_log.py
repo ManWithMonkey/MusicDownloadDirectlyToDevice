@@ -5,44 +5,44 @@ from pytube import Playlist
 from sys import argv
 import random
 
-from inner import config, clear, cleanurl, converttrash, device
-
-from inner.timeout import timeout
-from inner.clear import ClearAllTrash, ClearAllSongs
-from inner.cleanurl import CleanURL
-from inner.converttrash import ConvertAll
-from inner.device import MoveAllToDevice
-from inner.log import GetRandomLogURLs
-
-from inner.config import *
+from timeout import *
+from clear import *
+from cleanurl import *
+from converttrash import *
+from device import *
+from logs import *
+from config import *
 
 def DownloadFromLog(logfile, link_cap = None):
-    print("Downloading from log:", link)
+    print("Downloading from log:", logfile)
 
-    urls = GetLogUrls(logfile)
+    titles = GetLogTitles(logfile)
+    count = len(titles)
+    chooseCount = (link_cap if link_cap else len(titles))
 
-    print("Found:", len(urls), "link(s) and downloading:", len(urls))
+    print("Found:", count, "link(s) and downloading:", chooseCount)
+    print("Searching links...")
+    titles = (sorted(titles, key=lambda _: random.random()))[:chooseCount]
+    urls = [GetUrlForTitle(title) for title in titles]
+
     for url in urls:
-        print(url)
-
-    # do something
+        DownloadVideo(url)
 
 if __name__ == '__main__':
-    # if len(argv) > 2:
-    #     link = CleanURL(argv[1])
-    #     ClearAllSongs()
-    #     ClearAllTrash()
-    #     DownloadPlaylist(link, int(argv[2]))
-    #     ConvertAll()
-    #     MoveAllToDevice()
-    # elif len(argv) > 1:
-    #     link = CleanURL(''.join(argv[1:]))
-    #     ClearAllSongs()
-    #     ClearAllTrash()
-    #     DownloadPlaylist(link)
-    #     ConvertAll()
-    #     MoveAllToDevice()
-    # else:
-    #     print("Give link to playlist.")
-    #     print("./download_playlist.py <link> <cap>")
-    pass
+    if len(argv) > 2:
+        ClearAllSongs()
+        ClearAllTrash()
+        DownloadFromLog(argv[1], int(argv[2]))
+        ConvertAll()
+        ClearDevice()
+        MoveAllToDevice()
+    elif len(argv) > 1:
+        ClearAllSongs()
+        ClearAllTrash()
+        DownloadFromLog(argv[1], int(argv[2]))
+        ConvertAll()
+        ClearDevice()
+        MoveAllToDevice()
+    else:
+        print("Give logfile location:")
+        print("./dowload_from_log.py <logfile> <cap>")

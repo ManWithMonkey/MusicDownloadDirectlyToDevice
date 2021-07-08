@@ -6,7 +6,7 @@ from os.path import isfile, join
 import glob
 import subprocess
 
-from filehelper import GetFilesInDirectory
+from filehelper import *
 from config import *
 
 def GetAllSongsOnDevice():

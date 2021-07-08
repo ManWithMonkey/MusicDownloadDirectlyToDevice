@@ -2,7 +2,6 @@
 
 import os
 import glob
-
 from config import *
 
 def ClearAllSongs():

@@ -3,8 +3,9 @@
 from datetime import datetime
 from random import choice
 
-from filehelper import GetFilesInDirectory
-from device import GetAllSongsOnDevice
+from filehelper import *
+from device import *
+from youtubestuff import *
 from config import *
 
 def LogDeviceSongs(tofile):
@@ -18,23 +19,29 @@ def LogDeviceSongs(tofile):
                 f.write(file[len(MUSICDST):]+"\n")
 
 def GetYTURLBasedOnLogNode(data):
-    return "???"
+    return GetLinkByTitle(data)
+
+def GetLogTitles(logfile):
+    print("Getting log:", logfile)
+    text = None
+    with open(logfile, 'r') as f:
+        text = f.read()
+    titles = text.split('\n')
+    return titles
 
 def GetRandomLog():
     files = GetFilesInDirectory(LOGDIR)
     file = choice(files)
     return file
 
-def GetLogURLs(logfile):
-    print("Getting log:", logfile)
-    text = None
-    with open(logfile, 'r') as f:
-        text = f.read()
-
-    datas = text.split()
-    result = [GetYTURLBasedOnLogNode(data) for data in datas]
-
-    return result
+# def GetLogUrls(logfile, link_cap = None):
+#     print("Getting log:", logfile)
+#     text = None
+#     with open(logfile, 'r') as f:
+#         text = f.read()
+#     datas = text.split('\n')
+#     result = [GetYTURLBasedOnLogNode(data[:-len(".mp3")]) for data in datas if data]
+#     return result
 
 if __name__ == '__main__':
     now = datetime.now()

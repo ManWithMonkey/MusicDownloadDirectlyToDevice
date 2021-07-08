@@ -3,7 +3,7 @@
 import re
 from sys import argv
 
-def CleanURL(url):
+def CleanPlaylistURL(url):
     pattern="(watch.+?(?=list)|&index.+|&start_radio.+)"
     prog = re.compile(pattern)
     results = prog.findall(url)
@@ -16,5 +16,5 @@ def CleanURL(url):
     return text
 
 if __name__ == "__main__":
-    url = CleanURL(argv[1])
+    url = CleanPlaylistURL(argv[1])
     print(url)
