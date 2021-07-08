@@ -18,9 +18,6 @@ def LogDeviceSongs(tofile):
             for file in files:
                 f.write(file[len(MUSICDST):]+"\n")
 
-def GetYTURLBasedOnLogNode(data):
-    return GetLinkByTitle(data)
-
 def GetLogTitles(logfile):
     print("Getting log:", logfile)
     text = None
@@ -34,16 +31,8 @@ def GetRandomLog():
     file = choice(files)
     return file
 
-# def GetLogUrls(logfile, link_cap = None):
-#     print("Getting log:", logfile)
-#     text = None
-#     with open(logfile, 'r') as f:
-#         text = f.read()
-#     datas = text.split('\n')
-#     result = [GetYTURLBasedOnLogNode(data[:-len(".mp3")]) for data in datas if data]
-#     return result
-
 if __name__ == '__main__':
     now = datetime.now()
     filename = LOGDIR + str(now)+".log"
+    print("Logging songs to:", filename)
     LogDeviceSongs(filename)

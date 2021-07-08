@@ -25,8 +25,7 @@ def DownloadFromLog(logfile, link_cap = None):
     titles = (sorted(titles, key=lambda _: random.random()))[:chooseCount]
     urls = [GetUrlForTitle(title) for title in titles]
 
-    for url in urls:
-        DownloadVideo(url)
+    DownloadVideos(urls)
 
 if __name__ == '__main__':
     if len(argv) > 2:

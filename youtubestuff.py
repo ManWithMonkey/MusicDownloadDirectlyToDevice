@@ -6,6 +6,12 @@ import random
 from pytube import Playlist, YouTube
 from youtubesearchpython import VideosSearch
 
+from timeout import *
+from clear import *
+from cleanurl import *
+from converttrash import *
+from device import *
+from youtubestuff import *
 from config import *
 
 def GetLinksByTitle(title, limit=3):
@@ -20,11 +26,25 @@ def GetLinkByTitle(title):
 def GetUrlForTitle(title):
     return GetLinkByTitle(title)
 
-def DownloadVideo(link):
-    print("Downloading video: ", link)
+@timeout(DOWNLOAD_DELAY)
+def DownloadVideo(link, no_msg = False):
+    if not no_msg:
+        print("Downloading video: ", link)
     vid = YouTube(link)
     t = vid.streams.filter(only_audio=True)
     t[0].download(TRASHDIR)
+
+def DownloadVideos(links):
+    MAX_ATTEMPTS = 2
+
+    for c in range(len(links)):
+        for attempt in range(MAX_ATTEMPTS):
+            try:
+                msg = f"[{c+1}/{len(links)}]" + ("Downloading: \"" if attempt == 0 else "Attempting to download again: \"") + links[c]
+                DownloadVideo(links[c], no_msg = True)
+                break
+            except:
+                continue
 
 def DownloadPlaylist(link, link_cap = None):
     print("Downloading playlist:", link)
@@ -38,7 +58,7 @@ def DownloadPlaylist(link, link_cap = None):
         print(url)
 
     @timeout(DOWNLOAD_DELAY)
-    def DownloadVideo(video, msg):
+    def DownloadVideoWithObject(video, msg):
         print(msg)
         audio = video.streams.get_by_itag('140')
         audio.download(output_path=TRASHDIR)
@@ -48,7 +68,7 @@ def DownloadPlaylist(link, link_cap = None):
         for attempt in range(MAX_ATTEMPTS):
             try:
                 msg = ("Downloading: \"" if attempt == 0 else "Attempting to download again: \"") + video.title + "\" to " + TRASHDIR
-                DownloadVideo(video, msg)
+                DownloadVideoWithObject(video, msg)
                 break
             except:
                 continue
