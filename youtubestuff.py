@@ -19,7 +19,9 @@ def GetLinksByTitle(title, limit=3):
     results = VideosSearch(title, limit=limit).result()
     return [x['link'] for x in results['result']]
 
-def GetLinkByTitle(title):
+# Add max length for videos !!
+
+def GetLinkByTitle(title, max_length = -1):
     links = GetLinksByTitle(title, 1)
     return links[0]
 
@@ -40,10 +42,12 @@ def DownloadVideos(links):
     for c in range(len(links)):
         for attempt in range(MAX_ATTEMPTS):
             try:
-                msg = f"[{c+1}/{len(links)}]" + ("Downloading: \"" if attempt == 0 else "Attempting to download again: \"") + links[c]
+                msg = f"[{c+1}/{len(links)}]: " + ("Downloading: \"" if attempt == 0 else "Attempting to download again: \"") + links[c]
+                print(msg)
                 DownloadVideo(links[c], no_msg = True)
                 break
             except:
+                print("Download failed.")
                 continue
 
 def DownloadPlaylist(link, link_cap = None):
@@ -54,8 +58,8 @@ def DownloadPlaylist(link, link_cap = None):
     videos, urls = list(zip(*(sorted(zip(playlist.videos, playlist.video_urls), key=lambda _: random.random()))[:link_cap if link_cap else len(playlist)]))
 
     print("Found:", len(playlist.videos), "link(s) and downloading:", len(urls))
-    for url in urls:
-        print(url)
+    for i, url in enumerate(urls):
+        print(f"{i+1}/{len(urls)}: {url}")
 
     @timeout(DOWNLOAD_DELAY)
     def DownloadVideoWithObject(video, msg):
